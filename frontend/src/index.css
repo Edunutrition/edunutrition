@@ -1,0 +1,96 @@
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/700.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Paper world: pale sage page, white cards, deep basil-black ink. */
+    --background: 90 30% 95%;
+    --foreground: 110 15% 12%;
+    --card: 0 0% 100%;
+    --secondary: 90 20% 91%;
+    --secondary-foreground: 110 15% 12%;
+    --muted: 90 18% 90%;
+    --muted-foreground: 110 8% 40%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 90 15% 85%;
+    --input: 90 15% 85%;
+    --radius: 0.85rem;
+
+    /* Role theme — overridden per-subtree by [data-role="student|school|admin"] below */
+    --primary: 140 39% 30%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 40 88% 58%;
+    --accent-foreground: 110 15% 12%;
+    --ring: 140 39% 30%;
+  }
+}
+
+/* Role theme overrides — plain rules (not @layer) so they always win over :root
+   regardless of source order; scoped via [data-role] rather than a class because
+   this project's toolchain was silently dropping sibling class rules here. */
+[data-role='student'] {
+  --primary: 140 39% 30%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 14 74% 57%;
+  --accent-foreground: 0 0% 100%;
+  --ring: 140 39% 30%;
+}
+
+[data-role='school'] {
+  --primary: 293 24% 30%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 40 88% 58%;
+  --accent-foreground: 110 15% 12%;
+  --ring: 293 24% 30%;
+}
+
+[data-role='admin'] {
+  --primary: 110 15% 14%;
+  --primary-foreground: 40 88% 90%;
+  --accent: 40 88% 58%;
+  --accent-foreground: 110 15% 12%;
+  --ring: 40 88% 58%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-offset-background;
+    ring-color: hsl(var(--ring));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
