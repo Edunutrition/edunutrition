@@ -11,7 +11,7 @@ export default function DashboardSchoolPage() {
     <RoleLayout
       theme="school"
       title="Tableau de bord école"
-      subtitle={`Bienvenue ${profile?.first_name ?? ''}, voici l’activité de ton établissement.`}
+      subtitle={`Bienvenue ${profile?.first_name ?? ''}, voici l’activité de ton école.`}
       navItems={[
         { label: 'Aperçu', href: '#apercu', icon: <Home className="h-4 w-4" /> },
         { label: 'Élèves', href: '#eleves', icon: <Users className="h-4 w-4" /> },
@@ -30,7 +30,7 @@ export default function DashboardSchoolPage() {
           <EmptyState
             icon={<Users className="h-7 w-7 text-primary" />}
             title="Aucun élève à afficher pour l’instant"
-            description="Les statistiques par élève apparaîtront ici dès que des comptes seront rattachés à ton école."
+            description="Dès que des comptes seront rattachés à ton école, tu retrouveras les statistiques de chaque élève ici."
           />
         </div>
       </section>

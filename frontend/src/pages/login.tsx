@@ -27,13 +27,13 @@ export default function LoginPage() {
             L’éducation nutritionnelle, version fraîche.
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-primary-foreground/80">
-            Des modules pensés pour le CO, le gymnase et l’université — construits avec les
-            infirmiers et enseignants romands.
+            Des cours de nutrition pour le CO, le gymnase et l’université, imaginés avec des
+            enseignant·e·s et des infirmier·ère·s scolaires de Suisse romande.
           </p>
         </motion.div>
 
         <p className="relative mt-10 text-xs text-primary-foreground/60 md:mt-0">
-          Éducation, pas consultation médicale.
+          On fait de la pédagogie ici, pas de la consultation médicale.
         </p>
       </div>
 

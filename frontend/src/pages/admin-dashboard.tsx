@@ -8,7 +8,7 @@ export default function AdminDashboardPage() {
     <RoleLayout
       theme="admin"
       title="Administration"
-      subtitle="Gère les écoles, les utilisateurs et les abonnements de la plateforme."
+      subtitle="Gère les écoles, les comptes et les abonnements."
       navItems={[
         { label: 'Aperçu', href: '#apercu', icon: <Home className="h-4 w-4" /> },
         { label: 'Écoles', href: '#ecoles', icon: <Building2 className="h-4 w-4" /> },
@@ -28,7 +28,7 @@ export default function AdminDashboardPage() {
           <EmptyState
             icon={<Building2 className="h-7 w-7 text-primary" />}
             title="Aucune école enregistrée"
-            description="Ajoute une première école pour commencer à inviter enseignants, infirmiers et élèves."
+            description="Ajoute ta première école pour pouvoir inviter enseignant·e·s, infirmier·ère·s et élèves."
           />
         </div>
       </section>

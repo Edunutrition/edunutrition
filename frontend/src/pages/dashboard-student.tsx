@@ -24,7 +24,7 @@ export default function DashboardStudentPage() {
     <RoleLayout
       theme="student"
       title={`Bonjour ${profile?.first_name ?? ''} 👋`}
-      subtitle="Voici tes modules d’éducation nutritionnelle."
+      subtitle="Voici où tu en es dans tes modules."
       navItems={[
         { label: 'Aperçu', href: '#apercu', icon: <Home className="h-4 w-4" /> },
         { label: 'Mes modules', href: '#modules', icon: <BookOpen className="h-4 w-4" /> },
@@ -44,7 +44,7 @@ export default function DashboardStudentPage() {
           <EmptyState
             icon={<Sprout className="h-7 w-7 text-primary" />}
             title="Aucun module disponible pour l’instant"
-            description="Ton école n’a pas encore publié de module — reviens bientôt, ou demande à ton enseignant·e ou infirmier·ère scolaire."
+            description="Ton école n’a pas encore publié de module. Reviens un peu plus tard, ou demande à ton enseignant·e ou infirmier·ère scolaire où ça en est."
           />
         )}
 
@@ -60,7 +60,7 @@ export default function DashboardStudentPage() {
       <section id="progression" className="mt-10 scroll-mt-6">
         <h2 className="font-display text-lg font-semibold text-foreground">Ta progression</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Complète des leçons pour voir ta progression apparaître ici.
+          Termine quelques leçons et tu verras ta progression s’afficher ici.
         </p>
       </section>
     </RoleLayout>
