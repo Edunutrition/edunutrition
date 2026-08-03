@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { BarChart3, BookOpen, Home, Sprout } from 'lucide-react';
+import { BarChart3, BookOpen, CheckCircle2, Home, Sprout, Target } from 'lucide-react';
 import { EmptyState } from '@/components/Dashboard/EmptyState';
 import { ModuleCard, type ModuleSummary } from '@/components/Dashboard/ModuleCard';
 import { RoleLayout } from '@/components/Dashboard/RoleLayout';
+import { StatTile } from '@/components/Dashboard/StatTile';
 import { useAuth } from '@/hooks/useAuth';
 import { apiFetch } from '@/lib/api';
 
@@ -14,11 +15,29 @@ function useModules() {
   });
 }
 
+interface ProgressRow {
+  completed: boolean;
+  quiz_score: number | null;
+}
+
+function useProgress() {
+  return useQuery<ProgressRow[]>({
+    queryKey: ['progress-me'],
+    queryFn: () => apiFetch('/api/progress/me'),
+    retry: false,
+  });
+}
+
 export default function DashboardStudentPage() {
   const { profile } = useAuth();
   const { data: modules, isLoading, isError } = useModules();
+  const { data: progress } = useProgress();
 
   const hasModules = !isLoading && !isError && modules && modules.length > 0;
+
+  const completedCount = progress?.filter((p) => p.completed).length ?? 0;
+  const scores = progress?.filter((p) => p.quiz_score != null).map((p) => p.quiz_score as number) ?? [];
+  const avgScore = scores.length > 0 ? Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length) : null;
 
   return (
     <RoleLayout
@@ -59,9 +78,25 @@ export default function DashboardStudentPage() {
 
       <section id="progression" className="mt-10 scroll-mt-6">
         <h2 className="font-display text-lg font-semibold text-foreground">Ta progression</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Termine quelques leçons et tu verras ta progression s’afficher ici.
-        </p>
+        {completedCount === 0 ? (
+          <p className="mt-1 text-sm text-muted-foreground">
+            Termine quelques leçons et tu verras ta progression s’afficher ici.
+          </p>
+        ) : (
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <StatTile
+              icon={<CheckCircle2 className="h-4 w-4" />}
+              label="Leçons terminées"
+              value={String(completedCount)}
+            />
+            <StatTile
+              icon={<Target className="h-4 w-4" />}
+              label="Score moyen aux quiz"
+              value={avgScore !== null ? `${avgScore}%` : '—'}
+              hint={avgScore === null ? 'Aucun quiz fait pour l’instant' : undefined}
+            />
+          </div>
+        )}
       </section>
     </RoleLayout>
   );

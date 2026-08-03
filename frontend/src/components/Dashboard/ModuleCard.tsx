@@ -10,7 +10,7 @@ const CATEGORY_ICON: Record<string, (props: { className?: string }) => JSX.Eleme
   marketing: Bread,
 };
 
-const LEVEL_LABEL: Record<string, string> = {
+export const LEVEL_LABEL: Record<string, string> = {
   co: 'Cycle d’orientation',
   gymnasium: 'Gymnase',
   university: 'Université',

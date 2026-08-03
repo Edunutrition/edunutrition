@@ -1,5 +1,6 @@
 import { LogOut, Menu, X } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { PlateLogo } from '@/components/Illustrations/PlateMark';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -46,17 +47,29 @@ export function RoleLayout({
       </div>
 
       <nav className="flex-1 space-y-1 px-3">
-        {navItems.map((item) => (
-          <a
-            key={item.href}
-            href={item.href}
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-          >
-            {item.icon}
-            {item.label}
-          </a>
-        ))}
+        {navItems.map((item) =>
+          item.href.startsWith('#') ? (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
+            >
+              {item.icon}
+              {item.label}
+            </a>
+          ) : (
+            <Link
+              key={item.href}
+              to={item.href}
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
+            >
+              {item.icon}
+              {item.label}
+            </Link>
+          ),
+        )}
       </nav>
 
       <div className="mx-3 mb-4 mt-6 rounded-lg bg-primary-foreground/10 px-3 py-3">

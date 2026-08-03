@@ -5,7 +5,9 @@ import AdminDashboardPage from '@/pages/admin-dashboard';
 import DashboardSchoolPage from '@/pages/dashboard-school';
 import DashboardStudentPage from '@/pages/dashboard-student';
 import LoginPage from '@/pages/login';
+import ModuleEditorPage from '@/pages/module-editor';
 import ModulePlayerPage from '@/pages/module-player';
+import ModulesManagePage from '@/pages/modules-manage';
 
 function HomeRedirect() {
   const { profile } = useAuth();
@@ -51,6 +53,30 @@ export default function App() {
         element={
           <ProtectedRoute allow={['admin']}>
             <AdminDashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/modules/manage"
+        element={
+          <ProtectedRoute allow={['admin', 'teacher', 'nurse']}>
+            <ModulesManagePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/modules/manage/new"
+        element={
+          <ProtectedRoute allow={['admin', 'teacher', 'nurse']}>
+            <ModuleEditorPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/modules/manage/:id/edit"
+        element={
+          <ProtectedRoute allow={['admin', 'teacher', 'nurse']}>
+            <ModuleEditorPage />
           </ProtectedRoute>
         }
       />

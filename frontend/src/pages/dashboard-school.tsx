@@ -1,4 +1,4 @@
-import { BarChart3, GraduationCap, Home, TrendingUp, Users } from 'lucide-react';
+import { BarChart3, BookOpen, GraduationCap, Home, TrendingUp, Users } from 'lucide-react';
 import { EmptyState } from '@/components/Dashboard/EmptyState';
 import { RoleLayout } from '@/components/Dashboard/RoleLayout';
 import { StatTile } from '@/components/Dashboard/StatTile';
@@ -14,6 +14,7 @@ export default function DashboardSchoolPage() {
       subtitle={`Bienvenue ${profile?.first_name ?? ''}, voici l’activité de ton école.`}
       navItems={[
         { label: 'Aperçu', href: '#apercu', icon: <Home className="h-4 w-4" /> },
+        { label: 'Modules', href: '/modules/manage', icon: <BookOpen className="h-4 w-4" /> },
         { label: 'Élèves', href: '#eleves', icon: <Users className="h-4 w-4" /> },
         { label: 'Statistiques', href: '#stats', icon: <BarChart3 className="h-4 w-4" /> },
       ]}

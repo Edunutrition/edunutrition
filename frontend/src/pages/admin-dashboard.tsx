@@ -1,4 +1,4 @@
-import { Building2, Home, Settings, ShieldCheck, Users } from 'lucide-react';
+import { BookOpen, Building2, Home, Settings, ShieldCheck, Users } from 'lucide-react';
 import { EmptyState } from '@/components/Dashboard/EmptyState';
 import { RoleLayout } from '@/components/Dashboard/RoleLayout';
 import { StatTile } from '@/components/Dashboard/StatTile';
@@ -11,6 +11,7 @@ export default function AdminDashboardPage() {
       subtitle="Gère les écoles, les comptes et les abonnements."
       navItems={[
         { label: 'Aperçu', href: '#apercu', icon: <Home className="h-4 w-4" /> },
+        { label: 'Modules', href: '/modules/manage', icon: <BookOpen className="h-4 w-4" /> },
         { label: 'Écoles', href: '#ecoles', icon: <Building2 className="h-4 w-4" /> },
         { label: 'Utilisateurs', href: '#utilisateurs', icon: <Users className="h-4 w-4" /> },
         { label: 'Paramètres', href: '#parametres', icon: <Settings className="h-4 w-4" /> },

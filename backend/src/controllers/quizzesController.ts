@@ -61,10 +61,12 @@ async function getLessonOrThrow(lessonId: string, moduleId: string) {
   return lesson;
 }
 
-// GET /api/modules/:moduleId/lessons/:lessonId/quiz — questions without the
-// `correct` answer, so students can't peek at it in the network tab.
+// GET /api/modules/:moduleId/lessons/:lessonId/quiz — the module's owner (or
+// an admin) gets `correct` back so they can edit it; anyone else (students)
+// gets the questions stripped of the answer, so it can't be read off the
+// network tab.
 export async function getQuiz(req: Request, res: Response) {
-  await assertModuleVisible(req);
+  const module = await assertModuleVisible(req);
   await getLessonOrThrow(req.params.lessonId, req.params.moduleId);
 
   const { data: quiz, error } = await supabaseAdmin
@@ -75,7 +77,10 @@ export async function getQuiz(req: Request, res: Response) {
   if (error) throw new ApiError(500, error.message);
   if (!quiz) throw new ApiError(404, 'Aucun quiz pour cette leçon');
 
-  const questions = (quiz.questions as QuizQuestion[]).map(({ question, options }) => ({ question, options }));
+  const canEdit = module.created_by === req.user!.id || req.user!.profile?.role === 'admin';
+  const questions = canEdit
+    ? quiz.questions
+    : (quiz.questions as QuizQuestion[]).map(({ question, options }) => ({ question, options }));
   res.json({ id: quiz.id, questions });
 }
 
