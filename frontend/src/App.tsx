@@ -8,6 +8,7 @@ import LoginPage from '@/pages/login';
 import ModuleEditorPage from '@/pages/module-editor';
 import ModulePlayerPage from '@/pages/module-player';
 import ModulesManagePage from '@/pages/modules-manage';
+import UsersManagePage from '@/pages/users-manage';
 
 function HomeRedirect() {
   const { profile } = useAuth();
@@ -77,6 +78,14 @@ export default function App() {
         element={
           <ProtectedRoute allow={['admin', 'teacher', 'nurse']}>
             <ModuleEditorPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/users/manage"
+        element={
+          <ProtectedRoute allow={['admin']}>
+            <UsersManagePage />
           </ProtectedRoute>
         }
       />
