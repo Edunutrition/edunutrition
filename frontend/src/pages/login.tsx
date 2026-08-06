@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LoginForm } from '@/components/Auth/LoginForm';
 import { PlateLogo } from '@/components/Illustrations/PlateMark';
 import { ProduceScatter } from '@/components/Illustrations/Produce';
@@ -49,6 +49,18 @@ export default function LoginPage() {
             Retrouve tes modules et ta progression.
           </p>
           <LoginForm onSuccess={() => navigate('/')} />
+
+          <p className="mt-6 text-xs text-muted-foreground">
+            En te connectant, tu acceptes les{' '}
+            <Link to="/cgu" className="underline hover:text-foreground">
+              conditions d’utilisation
+            </Link>{' '}
+            et la{' '}
+            <Link to="/confidentialite" className="underline hover:text-foreground">
+              politique de confidentialité
+            </Link>
+            .
+          </p>
         </motion.div>
       </div>
     </div>

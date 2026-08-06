@@ -4,6 +4,8 @@ import { useAuth } from '@/hooks/useAuth';
 import AdminDashboardPage from '@/pages/admin-dashboard';
 import DashboardSchoolPage from '@/pages/dashboard-school';
 import DashboardStudentPage from '@/pages/dashboard-student';
+import LegalPrivacyPage from '@/pages/legal-privacy';
+import LegalTermsPage from '@/pages/legal-terms';
 import LoginPage from '@/pages/login';
 import ModuleEditorPage from '@/pages/module-editor';
 import ModulePlayerPage from '@/pages/module-player';
@@ -24,6 +26,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/cgu" element={<LegalTermsPage />} />
+      <Route path="/confidentialite" element={<LegalPrivacyPage />} />
 
       <Route
         path="/"
